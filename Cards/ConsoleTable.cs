@@ -42,7 +42,7 @@ namespace Cards
             if (!Game.WhoseTurn.Defender && !Game.WhoseTurn.Attacker) Console.WriteLine($"Player {Game.WhoseTurn.Name} is walking! ");
             if (Game.WhoseTurn.Attacker) Console.WriteLine($"Player {Game.WhoseTurn.Name} is attacking! ");
             if (Game.WhoseTurn.Defender) Console.WriteLine($"Player {Game.WhoseTurn.Name} is defending! ");
-            Console.WriteLine("\n Select a card by clicking the appropriate number.");
+            Console.WriteLine("\n Select a card by entering the appropriate number.");
 
             var number = 0;
             foreach (var card in Game.WhoseTurn.Hand)
