@@ -22,7 +22,7 @@ namespace Cards
         /// <returns>здесь описать что возвращает</returns>
         public int WriteNumber(Player player)
         {
-            BubbleSort(player, player.Hand);
+            Utils.BubbleSort(player, player.Hand);
             counter = 0;
 
             if (player.Attacker) return 0;
@@ -69,32 +69,6 @@ namespace Cards
 
             if (Game.IsTaker == true) Thread.Sleep(11000);
             return player.Hand.Count + 2;
-        }
-        
-        private void BubbleSort(Player player, List<Card> list)
-        {
-            var listTrump = new List<Card>();
-            for (int i = 0; i < list.Count; i++)
-                for (int j = 0; j < list.Count - 1; j++)
-                {
-                    var card = list[j + 1];
-                    if (CardsComparer.IsTrump(card) && counter != 1)
-                    {
-                        listTrump.Add(card);
-                        list.Remove(card);
-                        j--;
-                        continue;
-                    }
-                    else if (list[j].Value > list[j + 1].Value)
-                    {
-                        list[j + 1] = list[j];
-                        list[j] = card;
-                    }
-                }
-
-            counter++;
-            if (counter == 1) BubbleSort(player, listTrump);
-            if (counter != 3) { player.Hand.AddRange(list); counter++; }
         }
     }
 }
