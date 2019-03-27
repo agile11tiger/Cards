@@ -8,8 +8,10 @@ namespace Cards
 {
     public class Card
     {
-        public CardValue Value { get; set; }
-        public CardSuit Suit { get; set; }
+        // т.к. эти свойства задаются один раз при инициализации класса и не изменяются в дальнейшем, 
+        // можно убрать метод set, тем самым формально сделав их "readonly"
+        public CardValue Value { get; }
+        public CardSuit Suit { get; }
 
         public Card(CardSuit suit, CardValue value)
         {
@@ -17,14 +19,12 @@ namespace Cards
             Value = value;
         }
 
-        public bool IsTrump(CardSuit trump)
-        {
-            return Suit == trump;
-        }
+        //можно вот так
+        public bool IsTrump(CardSuit trump) => Suit == trump;
 
         public static bool operator >(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 1:
                     return true;
@@ -37,7 +37,7 @@ namespace Cards
 
         public static bool operator <(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case -1:
                     return true;
@@ -50,7 +50,7 @@ namespace Cards
 
         public static bool operator !=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return false;
@@ -63,7 +63,7 @@ namespace Cards
 
         public static bool operator ==(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return true;
@@ -76,7 +76,7 @@ namespace Cards
 
         public static bool operator >=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case 1:
@@ -89,7 +89,7 @@ namespace Cards
 
         public static bool operator <=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case -1:
@@ -100,10 +100,8 @@ namespace Cards
             }
         }
 
-        public override string ToString()
-        {
-            return $"{Value} {Suit}";
-        }
+        // и так тоже можно
+        public override string ToString() => $"{Value} {Suit}";
     }
 
     public enum CardSuit

@@ -19,7 +19,7 @@ namespace Cards
         public static Deck Deck { get; set; }
         public static Player WhoseTurn { get; set; }
         public static List<Player> Players { get; set; }
-        public static List<CardPairOnTable> CardsPairsOnTable { get; set; }
+        public static List<CardPair> CardsPairsOnTable { get; set; }
 
         public static bool TryConnect(Player player)
         {
@@ -39,11 +39,11 @@ namespace Cards
         public static void StartGame()
         {
             Deck = new Deck();
-            CardsComparer.TrumpSuit = Deck.TrumpSuit;
+            CardsComparerHelper.TrumpSuit = Deck.TrumpSuit;
             HandOutCards();
             WhoseTurn = DecideWhoseTurn();
             WhoseTurn.Attacker = true;
-            CardsPairsOnTable = new List<CardPairOnTable>();
+            CardsPairsOnTable = new List<CardPair>();
         }
 
         public static void StopGame()

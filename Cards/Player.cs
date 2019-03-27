@@ -54,15 +54,15 @@ namespace Cards
                 {
                     if (Game.counter % 2 != 0)
                     {
-                        var cardPair = new CardPairOnTable();
-                        cardPair.Add(card);
+                        var cardPair = new CardPair();
+                        cardPair.TryAdd(card);
                         Game.CardsPairsOnTable.Add(cardPair);
                         Hand.RemoveAt(numberCard);
                         return true;
                     }
                     else if (Game.counter % 2 == 0)
                     {
-                        var result = Game.CardsPairsOnTable.Last().Add(card);
+                        var result = Game.CardsPairsOnTable.Last().TryAdd(card);
                         if (!result) { Game.counter--; return false; }
                         Hand.RemoveAt(numberCard);
                         return true;

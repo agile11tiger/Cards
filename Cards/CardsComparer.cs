@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cards
 {
-    public static class CardsComparer
+    // статические классы часто удобно называть Хэлперами. У нас подходящий случай
+    public static class CardsComparerHelper
     {
         public static CardSuit? TrumpSuit { get; set; }
 
@@ -22,6 +23,11 @@ namespace Cards
                 throw new Exception("There is no trump in the game.");
             }
 
+            // верификация аргументов
+            if (card1 is null && card2 is null) return 0;
+            if (card1 is null) return -1;
+            if (card2 is null) return 1;
+
             if (card1.Suit == card2.Suit)
             {
                 if (card1.Value == card2.Value) return 0;
@@ -32,6 +38,16 @@ namespace Cards
             else if (IsTrump(card2)) return -1;
 
             else return -1; //throw new Exception($"Разная масть у {card1} и {card2}");
+        }
+    }
+
+    // Нужен для того, чтобы работал Sort
+    public class CardComparer : IComparer<Card>
+    {
+        public int Compare(Card card1, Card card2)
+        {
+            // воспользуемся хелпером
+            return CardsComparerHelper.Compare(card1, card2);
         }
     }
 }
