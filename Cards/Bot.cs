@@ -39,7 +39,7 @@ namespace Cards
                         return index;
                     }
 
-                    if (CardsComparer.IsTrump(myCard) && !(CardsComparer.IsTrump(enemyCard.LessCard)))
+                    if (CardsComparerHelper.IsTrump(myCard) && !(CardsComparerHelper.IsTrump(enemyCard.LessCard)))
                     {
                         return index;
                     }
@@ -61,7 +61,7 @@ namespace Cards
                 var index = 0;
                 foreach (var card1 in player.Hand)
                 {
-                    if (CardsComparer.IsTrump(card1)) break;
+                    if (CardsComparerHelper.IsTrump(card1)) break;
                     if (card1.Value == card.Value) return index;
                     index++;
                 }

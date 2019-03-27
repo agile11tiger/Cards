@@ -24,7 +24,7 @@ namespace Cards
 
         public static bool operator >(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 1:
                     return true;
@@ -37,7 +37,7 @@ namespace Cards
 
         public static bool operator <(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case -1:
                     return true;
@@ -50,7 +50,7 @@ namespace Cards
 
         public static bool operator !=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return false;
@@ -63,7 +63,7 @@ namespace Cards
 
         public static bool operator ==(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return true;
@@ -76,7 +76,7 @@ namespace Cards
 
         public static bool operator >=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case 1:
@@ -89,7 +89,7 @@ namespace Cards
 
         public static bool operator <=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case -1:

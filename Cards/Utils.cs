@@ -18,7 +18,7 @@ namespace Cards
                     var card = list[j + 1];
                     // и соотвественно он не должен зависеть от counter
                     // где-то тут прячеться изначально неверная логика
-                    if (CardsComparer.IsTrump(card) && counter != 1)
+                    if (CardsComparerHelper.IsTrump(card) && counter != 1)
                     {
                         listTrump.Add(card);
                         list.Remove(card);
