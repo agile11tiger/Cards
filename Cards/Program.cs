@@ -8,14 +8,15 @@ namespace Cards
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            var countPlayers = 3;
+            var countPlayers = 2;
             var game = new GameDurak(countPlayers);
             var players = new List<Player>(countPlayers);
             for (int i = 1; i <= countPlayers; i++)
             {
                 players.Add(new Player(i.ToString()));
+                if (i >= 2) players[i - 1].IsBot = true;
             }
             var table = new ConsoleTable(game, players);
         }

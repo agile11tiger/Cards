@@ -23,11 +23,12 @@ namespace Cards
         {
             while (true)
             {
+                var bot = new Bot();
                 var number = 0;
                 var result = false;
 
                 if (!Game.WhoseTurn.IsBot) result = int.TryParse(Console.ReadLine(), out number);
-             // if (Game.WhoseTurn.IsBot) { number = Bot.WriteNumber(); result = true; }
+                if ( Game.WhoseTurn.IsBot) { number = bot.WriteNumber(Game.WhoseTurn); result = true; }
 
                 if (0 <= number && number <= Game.WhoseTurn.Hand.Count + 2 && result)
                 {
@@ -40,6 +41,7 @@ namespace Cards
 
                     if (number == Game.WhoseTurn.Hand.Count + 1 && Game.WhoseTurn.Defender)
                     {
+                        Game.IsTaker = true;
                         Game.WhoseTurn.Take();
                         counterNextRound = 6;
                         break;
@@ -50,6 +52,7 @@ namespace Cards
                     if (number == Game.WhoseTurn.Hand.Count + 2)
                     {
                         var flag = Game.WhoseTurn.Pass();
+                        if (flag && Game.Players.Count == 2) counterNextRound++;
                         if (flag) { counterPass++; counterNextRound++; break; }
                         continue;
                     }
@@ -137,12 +140,13 @@ namespace Cards
                     else continue;
 
                     Game.HandOutCards();
-                    if (Game.IsFool) return;
-                    if (Game.IsDraw) return;
                     counterPass = 0;
                     counterNextRound = 0;
                     counterForTurn = 1;
                     Game.IsDefender = false;
+                    Game.IsTaker = false;
+                    if (Game.IsFool) return;
+                    if (Game.IsDraw) return;
                     Game.WhoseTurn.Defender = false;
                     Game.WhoseTurn.Attacker = true;
                     Game.CardsPairsOnTable.Clear();
@@ -151,7 +155,7 @@ namespace Cards
                 }
             }
         }
-
+        
         public static void AllowGoNextInQueue(Player player)
         {
             if (Game.Players.Count == 1) return;
@@ -164,17 +168,18 @@ namespace Cards
             else if (player.Defender || player.Attacker)
             {
                 Game.WhoseTurn = Game.Players[number_];
-                Game.WhoseTurn.Attacker = true;
             }
         }
 
         public static void PlayersThrowOutCards()
         {
+            var bot = new Bot();
             var list = new List<Card>();
             var timer = new TimerForCards();
             var number = Game.WhoseTurn.QueueNumber;
             Player throwingPlayer = null;
             var counter = 2;
+            if (Game.Players.Count == 2) counter--;
 
             for (var i = 0; i < counter; i++)
             {
@@ -198,8 +203,8 @@ namespace Cards
 
                     var numeric = 0;
                     var result = false;
-                    if (!Game.WhoseTurn.IsBot) result = int.TryParse(Console.ReadLine(), out numeric);
-                  //if ( Game.WhoseTurn.IsBot) { numeric = Bot.WriteNumber(); result = true; }
+                    if (!throwingPlayer.IsBot) result = int.TryParse(Console.ReadLine(), out numeric);
+                    if (throwingPlayer.IsBot) { numeric = bot.WriteNumber(throwingPlayer); result = true; }
 
                     if (result && numeric <= throwingPlayer.Hand.Count && throwingPlayer.IsValueCardOnTable(numeric))
                     {

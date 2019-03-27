@@ -19,7 +19,7 @@ namespace Cards
         {
             if (TrumpSuit is null)
             {
-                throw new Exception("в игре нет козыря");
+                throw new Exception("There is no trump in the game.");
             }
 
             if (card1.Suit == card2.Suit)

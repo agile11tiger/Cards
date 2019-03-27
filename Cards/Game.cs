@@ -13,6 +13,7 @@ namespace Cards
         public static bool IsDefender;
         public static bool IsFool;
         public static bool IsDraw;
+        public static bool IsTaker;
         public const int MaxPlayers = 6;
         public const int LimiterHandOutCards = 6;
         public static Deck Deck { get; set; }
@@ -171,12 +172,13 @@ namespace Cards
 
         public static void HandOutCards()
         {
-            var counter1 = 0; //нужен для того, чтобы дать последнему игроку, если это возможно, удалиться. (и получить ничью)
+            var flag = false; //нужен для того, чтобы дать последнему игроку, если это возможно, удалиться. (и получить ничью)
             while (true)
             {
                 var number = 1;
                 foreach (var player in Players)
                 {
+                    flag = true;
                     player.QueueNumber = number;
                     number++;
 
@@ -184,6 +186,7 @@ namespace Cards
                     {
                         GameDurak.AllowGoNextInQueue(player);
                         Players.Remove(player);
+                        flag = false;
                         break;
                     }
 
@@ -192,9 +195,8 @@ namespace Cards
                         player.Hand.Add(Deck.Cards.Pop());
                     }
                 }
-
-                if (Players.Count == 1) counter1++;
-                if (number == Players.Count + 1 && (counter1 == 0 || counter1 == 2))
+                
+                if (number == Players.Count + 1 && flag)
                 {
                     if (Players.Count == 0) IsDraw = true;
                     if (Players.Count == 1) IsFool = true;

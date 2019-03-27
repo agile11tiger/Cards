@@ -18,7 +18,7 @@ namespace Cards
                 LessCard = card;
                 return true;
             }
-            else if (!(LessCard is null) /*&& card > LessCard*/)
+            else if (!(LessCard is null))
             {
                 if (!(card > LessCard))
                 {

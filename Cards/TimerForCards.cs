@@ -10,7 +10,7 @@ namespace Cards
     class TimerForCards
     {
         public static int counter = 0;
-        private Timer timer = new Timer(1000);
+        public Timer timer = new Timer(1000);
         private Player throwingPlayer;
         private List<Card> list;
 
@@ -18,7 +18,6 @@ namespace Cards
         {
             throwingPlayer = throwingPlayer_;
             list = list_;
-            timer.Elapsed -= timer_Elapsed;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
         }
@@ -28,10 +27,10 @@ namespace Cards
             counter++;
             ConsoleTable.Animations(throwingPlayer, list);
 
-            if (counter == 10)
+            if (counter >= 10)
             {
                 timer.Stop();
-                timer.Close();
+                timer.Elapsed -= timer_Elapsed;
             }
         }
     }

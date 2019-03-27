@@ -23,8 +23,8 @@ namespace Cards
 
             while (true)
             {
-                if (Game.IsFool) break;
-                if (Game.IsDraw) break;
+                if (Game.IsFool) break; 
+                if (Game.IsDraw) break; 
                 ShowPlayerCards();
                 game.MakeMove();
                 game.СhangeWhoseTurn();
@@ -33,12 +33,16 @@ namespace Cards
             Console.Clear();
             if (Game.IsDraw) Console.WriteLine("Congratulations, you have a draw");
             if (Game.IsFool) Console.WriteLine($"Plaer {Game.Players[0].Name} is Fool");
-            Console.Read();
+            Console.WriteLine("/nIf you want to continue click ENTER");
+            Console.ReadKey();
+            Game.IsDraw = false;
+            Game.IsFool = false;
+            Program.Main();
         }
 
         public void ShowPlayerCards()
         {
-            Console.WriteLine($"\nTrump suit: {Game.Deck.TrumpSuit}");
+            Console.WriteLine($"\nTrump suit: {Game.Deck.TrumpSuit} \n(Cards in the deck: {Game.Deck.Cards.Count})");
             if (!Game.WhoseTurn.Defender && !Game.WhoseTurn.Attacker) Console.WriteLine($"Player {Game.WhoseTurn.Name} is walking! ");
             if (Game.WhoseTurn.Attacker) Console.WriteLine($"Player {Game.WhoseTurn.Name} is attacking! ");
             if (Game.WhoseTurn.Defender) Console.WriteLine($"Player {Game.WhoseTurn.Name} is defending! ");
@@ -59,8 +63,9 @@ namespace Cards
         public static void Animations(Player throwingPlayer, List<Card> list)
         {
             Console.Clear();
+            Console.WriteLine($"Trump suit: {Game.Deck.TrumpSuit}");
             Console.WriteLine($"Player {Game.WhoseTurn.Name} is taking.\n\n Player {throwingPlayer.Name} is throwingPlayer." +
-                $"\nYou have 10 ({TimerForCards.counter}) seconds to throw cards. Then click ENTER to continue");
+                $"\nYou have 10 ({TimerForCards.counter}) seconds to throw cards. Then click ENTER to continue.");
 
             var number = 0;
             foreach (var card in throwingPlayer.Hand)

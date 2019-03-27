@@ -75,9 +75,9 @@ namespace Cards
 
         public bool Pass()
         {
-            if (Game.WhoseTurn.Attacker) { Console.WriteLine(@" An attacker can`t pass a move!"); return false; }
+            if (Game.WhoseTurn.Attacker)
+            { Console.WriteLine(@" An attacker can`t pass a move!"); return false; }
             if (Game.WhoseTurn.Defender) { Console.WriteLine(@" Who will beat a card? If you can`t then take it!"); return false; }
-            Game.counter++;
             return true;
         }
 
