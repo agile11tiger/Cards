@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot.cs" />
-    <Compile Include="Cardcs.cs" />
+    <Compile Include="Card.cs" />
     <Compile Include="CardsComparer.cs" />
     <Compile Include="CardsPairOnTable.cs" />
     <Compile Include="ConsoleTable.cs" />
