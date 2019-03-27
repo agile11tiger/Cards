@@ -14,6 +14,12 @@ namespace Cards
         // в остальных случаях имя counter является неочевидным и требует уточнения.
         int counter;
 
+
+        /// <summary>
+        /// Добавить описание функции (т.е. summary), т.к. работа функции неочевидна и достаточно сложна
+        /// </summary>
+        /// <param name="player">здесь описать почему передаётся именно этот параметр</param>
+        /// <returns>здесь описать что возвращает</returns>
         public int WriteNumber(Player player)
         {
             BubbleSort(player, player.Hand);
