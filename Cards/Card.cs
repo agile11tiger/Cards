@@ -8,23 +8,21 @@ namespace Cards
 {
     public class Card
     {
-        public CardValue Value { get; set; }
-        public CardSuit Suit { get; set; }
+        public readonly CardValue Value;
+        public readonly CardSuit Suit;
+
+        public bool IsTrump(CardSuit trump) => Suit == trump;
+        public override string ToString() => $"{Value} {Suit}";
 
         public Card(CardSuit suit, CardValue value)
         {
             Suit = suit;
             Value = value;
         }
-
-        public bool IsTrump(CardSuit trump)
-        {
-            return Suit == trump;
-        }
-
+        
         public static bool operator >(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 1:
                     return true;
@@ -37,7 +35,7 @@ namespace Cards
 
         public static bool operator <(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case -1:
                     return true;
@@ -50,7 +48,7 @@ namespace Cards
 
         public static bool operator !=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return false;
@@ -63,7 +61,7 @@ namespace Cards
 
         public static bool operator ==(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                     return true;
@@ -76,7 +74,7 @@ namespace Cards
 
         public static bool operator >=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case 1:
@@ -89,7 +87,7 @@ namespace Cards
 
         public static bool operator <=(Card card1, Card card2)
         {
-            switch (CardsComparer.Compare(card1, card2))
+            switch (CardsComparerHelper.Compare(card1, card2))
             {
                 case 0:
                 case -1:
@@ -98,11 +96,6 @@ namespace Cards
                 default:
                     return false;
             }
-        }
-
-        public override string ToString()
-        {
-            return $"{Value} {Suit}";
         }
     }
 

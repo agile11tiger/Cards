@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cards
 {
-    public static class CardsComparer
+    public static class CardsComparerHelper
     {
         public static CardSuit? TrumpSuit { get; set; }
 
@@ -17,11 +17,8 @@ namespace Cards
 
         public static int Compare(Card card1, Card card2)
         {
-            if (TrumpSuit is null)
-            {
-                throw new Exception("There is no trump in the game.");
-            }
-
+            if (TrumpSuit is null) throw new Exception("There is no trump in the game.");
+            
             if (card1.Suit == card2.Suit)
             {
                 if (card1.Value == card2.Value) return 0;

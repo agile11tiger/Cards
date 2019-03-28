@@ -9,12 +9,11 @@ namespace Cards
 {
     class Bot
     {
-        int counter;
-
         public int WriteNumber(Player player)
         {
-            BubbleSort(player, player.Hand);
-            counter = 0;
+            var listTrump = Utils.BubbleSort(player);
+            var listTrumpSorted = Utils.BubbleSort(listTrump);
+            player.Hand.AddRange(listTrump);
 
             if (player.Attacker) return 0;
 
@@ -30,7 +29,7 @@ namespace Cards
                         return index;
                     }
 
-                    if (CardsComparer.IsTrump(myCard) && !(CardsComparer.IsTrump(enemyCard.LessCard)))
+                    if (CardsComparerHelper.IsTrump(myCard) && !(CardsComparerHelper.IsTrump(enemyCard.LessCard)))
                     {
                         return index;
                     }
@@ -52,7 +51,7 @@ namespace Cards
                 var index = 0;
                 foreach (var card1 in player.Hand)
                 {
-                    if (CardsComparer.IsTrump(card1)) break;
+                    if (CardsComparerHelper.IsTrump(card1)) break;
                     if (card1.Value == card.Value) return index;
                     index++;
                 }
@@ -60,32 +59,6 @@ namespace Cards
 
             if (Game.IsTaker == true) Thread.Sleep(11000);
             return player.Hand.Count + 2;
-        }
-        
-        private void BubbleSort(Player player, List<Card> list)
-        {
-            var listTrump = new List<Card>();
-            for (int i = 0; i < list.Count; i++)
-                for (int j = 0; j < list.Count - 1; j++)
-                {
-                    var card = list[j + 1];
-                    if (CardsComparer.IsTrump(card) && counter != 1)
-                    {
-                        listTrump.Add(card);
-                        list.Remove(card);
-                        j--;
-                        continue;
-                    }
-                    else if (list[j].Value > list[j + 1].Value)
-                    {
-                        list[j + 1] = list[j];
-                        list[j] = card;
-                    }
-                }
-
-            counter++;
-            if (counter == 1) BubbleSort(player, listTrump);
-            if (counter != 3) { player.Hand.AddRange(list); counter++; }
         }
     }
 }

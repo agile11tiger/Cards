@@ -33,7 +33,7 @@ namespace Cards
             Console.Clear();
             if (Game.IsDraw) Console.WriteLine("Congratulations, you have a draw");
             if (Game.IsFool) Console.WriteLine($"Plaer {Game.Players[0].Name} is Fool");
-            Console.WriteLine("/nIf you want to continue click ENTER");
+            Console.WriteLine("If you want to continue click ENTER");
             Console.ReadKey();
             Game.IsDraw = false;
             Game.IsFool = false;

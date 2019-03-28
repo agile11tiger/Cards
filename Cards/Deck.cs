@@ -8,8 +8,9 @@ namespace Cards
 {
     public class Deck
     {
-        public Stack<Card> Cards { get; private set; }
-        public CardSuit TrumpSuit { get; private set; }
+        public readonly Stack<Card> Cards;
+        public readonly CardSuit TrumpSuit;
+        private CardSuit GetTrumpSuit() => Cards.Last().Suit;
 
         public Deck()
         {
@@ -53,11 +54,5 @@ namespace Cards
             arr.SetValue(arr.GetValue(i), j);
             arr.SetValue(tmp, i);
         }
-
-        private CardSuit GetTrumpSuit()
-        {
-            return Cards.Last().Suit;
-        }
-
     }
 }

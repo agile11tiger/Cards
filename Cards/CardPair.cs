@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Cards
 {
-    public class CardPairOnTable
+    public class CardPair
     {
         public Card LargerCard { get; private set; }
         public Card LessCard { get; private set; }
 
-        public bool Add(Card card)
+        public bool TryAdd(Card card)
         {
             if (LargerCard is null && LessCard is null)
             {
@@ -26,6 +26,7 @@ namespace Cards
                         $"\n You have different suit of ({LessCard}) and ({card})");
                     return false;
                 }
+
                 LargerCard = card;
                 return true;
             }
@@ -34,11 +35,7 @@ namespace Cards
 
         public override string ToString()
         {
-            if (LargerCard is null)
-            {
-                return $"{LessCard.ToString()}:";
-            }
-
+            if (LargerCard is null) return $"{LessCard.ToString()}:";
             return $"{LessCard.ToString()}:{LargerCard.ToString()}";
         }
     }
